@@ -1,0 +1,85 @@
+@charset "utf-8";
+
+/*////////////////////////////single-menu////////////////////////////*/
+
+.wrap_product{
+	padding: 200px 0 120px;
+	display: flex;
+	justify-content: center;
+	width: 90%;
+}
+
+.vis_product{
+	width: 40%;
+	position: relative;
+	margin-right: 50px;
+}
+
+.vis_product img{
+	width: 100%;
+	height: auto;
+}
+
+.description_product{
+	width: 40%;
+}
+
+.name_product{
+	font-size: 3.6rem;
+	margin: 14px 0;
+	font-weight: 400;
+}
+
+.kakigentei_product{
+	background: red;
+	color: white;
+	font-weight: 400;
+	padding: 0 10px;
+	border-radius: 10px;
+}
+
+.description{
+	font-size: 1.8rem;
+}
+
+.price_product{
+	font-size: 2.6rem;
+}
+
+.price_product .bold{
+	font-weight: 400;
+	.big {
+		font-size: 160%;
+	}
+}
+
+@media screen and (max-width: 1030px){
+
+  .wrap_product{
+    padding: 160px 0 70px;
+    display: block;
+    width: 96%;
+  }
+
+  .vis_product{
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .description_product{
+    width: 100%;
+  }
+
+  .name_product{
+    font-size: 2.0rem;
+    margin: 14px 0;
+  }
+
+  .description {
+    font-size: 1.5rem;
+  }
+
+  .price_product{
+    font-size: 1.5rem;
+  }
+}

@@ -33,5 +33,6 @@
  	<p class="copyright">©2025 Omuraisunomori. All Rights Reserved.</p>
 </footer>
 
+<?php wp_footer(); ?>
 </body>
 </html>
