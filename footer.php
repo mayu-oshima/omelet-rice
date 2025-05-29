@@ -30,7 +30,7 @@
 		</div>
 
 	</div>
- 	<p class="copyright">©2021 Omuraisunomori. All Rights Reserved.</p>
+ 	<p class="copyright">©2025 Omuraisunomori. All Rights Reserved.</p>
 </footer>
 
 </body>

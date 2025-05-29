@@ -214,19 +214,39 @@ footer{
 }
 
 /* ///////////////////////////index(sp・ipad) /////////////////////////////*/
+
+.kv_home{
+	.box_catch {
+		.logo {
+			width: 230px;
+		}
+		.catch {
+			font-size: 2.3rem;
+		}
+	}
+}
+
 .main_wrap_home{
 	width: 96%;
 }
 
 /*---------------news（sp・ipad）----------------------*/
-.news_list th{
-	display: block;
-	text-align: left;
-}
-
 .news_list td{
 	display: block;
 }
+
+.news_list .item {
+	display: block;
+}
+
+.news_list .date {
+	padding-right: 0;
+}
+
+.news_list .text {
+	padding-bottom: 20px;
+}
+
 
 /*--------------introduction（sp・ipad）--------------*/
 #introduction{
@@ -239,9 +259,6 @@ footer{
 	width: 90%;
 }
 
-#image_omuraisu{
-	margin-left: 10%;
-}
 /*コンテンツ（sp・ipad）*/
 .content_spotlight{
 	position: relative;
@@ -253,24 +270,26 @@ footer{
 	font-size: 1.3rem;
 	margin: 0;
 	box-sizing: border-box;
-}
-
-#content_tamago,
-#content_sizen{
 	right: 0;
   margin: -4rem 0 0 10%;
-
-}
-
-#content_omuraisu{
-	left: 0;
-	margin: -4rem 0 0 0;
 }
 
 .btn_spotlight{
 	text-align: center;
 	margin-top: 40px;
 }
+
+/*偶数番目のみ*/
+.spotlight:nth-child(even) {
+	.image_spotlight {
+		margin-left: 10%;
+	}
+	.content_spotlight {
+		left: 0;
+		margin: -4rem 0 0 0;
+	}
+}
+
 
 /*///////////////////////about(sp・ipad) ////////////////////////////*/
 

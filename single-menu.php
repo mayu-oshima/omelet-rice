@@ -14,7 +14,7 @@
        <?php the_content(); ?>
 			</div>
       <p class="price_product">
-        <span class="bold"><span class="big"><?php echo esc_html(get_post_meta(get_the_ID(), 'price', true)) ?></span>円</span>( 税込 <?php echo esc_html(get_post_meta(get_the_ID(), 'tax-price', true)) ?>円 )
+        <span class="bold"><span class="big"><?php the_field('price'); ?></span>円</span>( 税込 <?php the_field('tax-price'); ?>円 )
       </p>
     </div>
   </div>

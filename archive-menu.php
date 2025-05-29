@@ -14,11 +14,11 @@
 		<div class="menu_item">
 			<a href="<?php the_permalink(); ?>">
 				<div class="wrap_menu_vis">
-					<?php the_post_thumbnail('full', ['class' => 'menu_vis']) ?>
+					<?php the_post_thumbnail('full', ['class' => 'menu_vis']); ?>
 				</div>
 				<p class="menu_name"><?php the_title(); ?></p>
 				<p class="price">
-					<span class="block_sp bold"><span class="big"><?php echo esc_html(get_post_meta(get_the_ID(), 'price', true)); ?></span>円</span>( 税込 <?php echo esc_html(get_post_meta(get_the_ID(), 'tax-price', true)); ?>円 )
+					<span class="block_sp bold"><span class="big"><?php the_field('price'); ?></span>円</span>( 税込 <?php the_field('tax-price'); ?>円 )
 				</p>
 			</a>
 		</div>
