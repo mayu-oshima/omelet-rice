@@ -186,4 +186,78 @@
 }
 
 @media screen and (max-width: 1030px){
+	.kv_home{
+		.box_catch {
+			.logo {
+				width: 230px;
+			}
+			.catch {
+				font-size: 2.3rem;
+			}
+		}
+	}
+
+	.main_wrap_home{
+		width: 96%;
+	}
+
+	/*---------------news（sp・ipad）----------------------*/
+	.news_list td{
+		display: block;
+	}
+
+	.news_list .item {
+		display: block;
+	}
+
+	.news_list .date {
+		padding-right: 0;
+	}
+
+	.news_list .text {
+		padding-bottom: 20px;
+	}
+
+
+	/*--------------introduction（sp・ipad）--------------*/
+	#introduction{
+		padding: 10px 0;
+	}
+
+	/*写真（sp・ipad）*/
+	/*写真*/
+	.image_spotlight{
+		width: 90%;
+	}
+
+	/*コンテンツ（sp・ipad）*/
+	.content_spotlight{
+		position: relative;
+		transform: none;
+		-webkit-transform: none;
+		width: 90%;
+		padding: 2.2em 3em 3.8em 3em;
+		text-align: left;
+		font-size: 1.3rem;
+		margin: 0;
+		box-sizing: border-box;
+		right: 0;
+		margin: -4rem 0 0 10%;
+	}
+
+	.btn_spotlight{
+		text-align: center;
+		margin-top: 40px;
+	}
+
+	/*偶数番目のみ*/
+	.spotlight:nth-child(even) {
+		.image_spotlight {
+			margin-left: 10%;
+		}
+		.content_spotlight {
+			left: 0;
+			margin: -4rem 0 0 0;
+		}
+	}
 }
