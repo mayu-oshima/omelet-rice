@@ -140,6 +140,16 @@ function my_enqueue_assets() {
     );
   }
 
+  // 固定ページ「thanks」専用（page-thanks.phpに対応）
+  if (is_page('thanks')) {
+    wp_enqueue_style(
+      'thanks-css',
+      get_template_directory_uri() . '/assets/css/thanks.css',
+      [],
+      filemtime(get_template_directory() . '/assets/css/thanks.css')
+    );
+  }
+
   // 固定ページ「access」専用（page-access.phpに対応）
   if (is_page('access')) {
     wp_enqueue_style(

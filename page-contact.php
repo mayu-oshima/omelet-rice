@@ -1,3 +1,85 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+
+  // 入力値をサニタイズ
+  $name_sei = sanitize_text_field($_POST['name_sei']);
+  $name_mei = sanitize_text_field($_POST['name_mei']);
+  $kana_sei = sanitize_text_field($_POST['kana_sei']);
+  $kana_mei = sanitize_text_field($_POST['kana_mei']);
+  $email = sanitize_email($_POST['email']);
+  $tel1 = sanitize_text_field($_POST['tel1']);
+  $tel2 = sanitize_text_field($_POST['tel2']);
+  $tel3 = sanitize_text_field($_POST['tel3']);
+	$how_map = [
+    'friends' => '知り合いの紹介で',
+    'magazine' => '雑誌・webサイトで見て',
+    'other' => 'その他'
+	];
+	$how = isset($_POST['how']) && isset($how_map[$_POST['how']])
+    ? $how_map[$_POST['how']]
+    : '';
+  $message = sanitize_textarea_field($_POST['message']);
+
+  // バリデーション
+  $errors = array();
+  if (empty($name_sei) || empty($name_mei)) {
+    $errors[] = 'お名前を入力してください。';
+  }
+  if (empty($email) || !is_email($email)) {
+    $errors[] = '有効なメールアドレスを入力してください。';
+  }
+  if (empty($message)) {
+    $errors[] = 'お問い合わせ内容を入力してください。';
+  }
+
+  if (empty($errors)) {
+    // 管理者宛メール
+    $to = get_option('admin_email');
+    $subject = '【オムライスの森】お問い合わせがありました';
+
+    $body = "お名前: {$name_sei} {$name_mei}\n";
+    $body .= "フリガナ: {$kana_sei} {$kana_mei}\n";
+    $body .= "メールアドレス: {$email}\n";
+    $body .= "電話番号: {$tel1}-{$tel2}-{$tel3}\n";
+    $body .= "きっかけ: {$how}\n";
+    $body .= "お問い合わせ内容:\n{$message}\n";
+
+    $headers = array('Content-Type: text/plain; charset=UTF-8', "From: オムライスの森 <omser9696@gmail.com>");
+
+    $mail_sent = wp_mail($to, $subject, $body, $headers);
+
+    if ($mail_sent) {
+      // 送信者へ自動返信メール
+      $auto_subject = '【オムライスの森】お問い合わせありがとうございます';
+      $auto_body = "{$name_sei} {$name_mei} 様\n\n";
+      $auto_body .= "この度はお問い合わせいただき誠にありがとうございます。\n";
+      $auto_body .= "以下の内容でお問い合わせを受け付けました。\n\n";
+      $auto_body .= "-------------------------\n";
+      $auto_body .= "お名前: {$name_sei} {$name_mei}\n";
+      $auto_body .= "フリガナ: {$kana_sei} {$kana_mei}\n";
+      $auto_body .= "メールアドレス: {$email}\n";
+      $auto_body .= "電話番号: {$tel1}-{$tel2}-{$tel3}\n";
+      $auto_body .= "きっかけ: {$how}\n";
+      $auto_body .= "お問い合わせ内容:\n{$message}\n";
+      $auto_body .= "-------------------------\n\n";
+      $auto_body .= "内容を確認の上、担当者よりご連絡させていただきます。\n";
+      $auto_body .= "今しばらくお待ちくださいませ。\n\n";
+      $auto_body .= "オムライスの森";
+
+      $auto_headers = array('Content-Type: text/plain; charset=UTF-8', "From: オムライスの森 <{$to}>");
+
+      wp_mail($email, $auto_subject, $auto_body, $auto_headers);
+
+      // thanksページへリダイレクト（URLは必要に応じて変更）
+      wp_redirect(home_url('/thanks'));
+      exit;
+    } else {
+      $errors[] = '送信に失敗しました。時間をおいて再度お試しください。';
+    }
+  }
+}
+?>
+
 <?php get_header(); ?>
 
 <!--メイン-->
@@ -20,7 +102,23 @@
 				お預かりした大切なお客様情報は、お問い合わせへの返信などに使用する以外の目的には一切使用いたしません。
 			</p>
 
-			<form medhod="POST" action="" id="form">
+			<?php if (!empty($errors)) : ?>
+				<div class="contact_errors">
+					<ul>
+						<?php foreach ($errors as $error) : ?>
+							<li><?php echo esc_html($error); ?></li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+			<?php endif; ?>
+
+			<?php if (!empty($success_message)) : ?>
+				<div class="contact_success">
+					<p><?php echo esc_html($success_message); ?></p>
+				</div>
+			<?php endif; ?>
+
+			<form method="POST" action="" id="form">
 				<div id="contact_form">
 
 					<div class="form_item">
@@ -60,9 +158,9 @@
 				  <div class="form_item">
 				    <label class="koumoku_form">当カフェをお知りになったきっかけは？</label>
 						<div>
-					    <label><input type="checkbox" name="how" value="friends">知り合いの紹介で</label>
-					    <label><input type="checkbox" name="how" value="magazine">雑誌・webサイトで見て</label><br class="br_sp">
-							<label><input type="checkbox" name="how" value="other">その他</label>
+					    <label><input type="radio" name="how" value="friends">知り合いの紹介で</label>
+					    <label><input type="radio" name="how" value="magazine">雑誌・webサイトで見て</label><br class="br_sp">
+							<label><input type="radio" name="how" value="other">その他</label>
 						</div>
 				  </div>
 
